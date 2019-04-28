@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.adamfisher.nifi:nifi-czds-processors:1.9.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/nifi-czds-processors/pom.xml!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/nifi-czds-processors/nifi-czds-processors-1.9.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/nifi-czds-processors/nifi-czds-processors-1.9.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

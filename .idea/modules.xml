@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/nifi-czds-nar/nifi-czds-nar.iml" filepath="$PROJECT_DIR$/nifi-czds-nar/nifi-czds-nar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nifi-czds-processors/nifi-czds-processors.iml" filepath="$PROJECT_DIR$/nifi-czds-processors/nifi-czds-processors.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nifi-icann-czds-bundle.iml" filepath="$PROJECT_DIR$/nifi-icann-czds-bundle.iml" />
+    </modules>
+  </component>
+</project>

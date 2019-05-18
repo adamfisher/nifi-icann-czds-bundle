@@ -37,8 +37,8 @@
         </dependency>
         <dependency>
             <groupId>org.icann.czds</groupId>
-            <artifactId>zonefile-downloader</artifactId>
-            <version>1.9.0</version>
+            <artifactId>czds-client</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>

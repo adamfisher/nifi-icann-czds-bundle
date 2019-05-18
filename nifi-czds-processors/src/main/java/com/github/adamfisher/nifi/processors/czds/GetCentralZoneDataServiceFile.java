@@ -19,6 +19,7 @@ package com.github.adamfisher.nifi.processors.czds;
 import org.apache.nifi.annotation.behavior.*;
 import org.apache.nifi.components.PropertyDescriptor;
 import org.apache.nifi.components.RequiredPermission;
+import org.apache.nifi.components.Validator;
 import org.apache.nifi.expression.ExpressionLanguageScope;
 import org.apache.nifi.flowfile.FlowFile;
 import org.apache.nifi.annotation.lifecycle.OnScheduled;
@@ -99,9 +100,11 @@ public class GetCentralZoneDataServiceFile extends AbstractProcessor {
     public static final PropertyDescriptor TOP_LEVEL_DOMAINS = new PropertyDescriptor
             .Builder().name("top-level-domains")
             .displayName("Top Level Domains")
-            .description("Specify the TLD(s) you want to download zone file(s) for. Comma separated multiple TLDs. " +
+            .description("Specify the TLD(s) you want to download zone file(s) for. Comma separate multiple TLDs. " +
                     "By default, all APPROVED zone files will be downloaded.")
+            .required(false)
             .expressionLanguageSupported(ExpressionLanguageScope.VARIABLE_REGISTRY)
+            .addValidator(Validator.VALID)
             .build();
 
     public static final PropertyDescriptor DIRECTORY = new PropertyDescriptor
@@ -113,8 +116,8 @@ public class GetCentralZoneDataServiceFile extends AbstractProcessor {
             .addValidator(StandardValidators.createDirectoryExistsValidator(true, false))
             .build();
 
-    public static final PropertyDescriptor KEEP_SOURCE_FILE = new PropertyDescriptor.Builder()
-            .name("Keep Source File")
+    public static final PropertyDescriptor KEEP_SOURCE_FILE = new PropertyDescriptor
+            .Builder().name("Keep Source File")
             .description("If true, the file is not deleted after it has been copied to the Content Repository; "
                     + "this causes the file to be picked up continually and is useful for testing purposes.  "
                     + "If not keeping original NiFi will need write permissions on the directory it is pulling "
@@ -181,15 +184,15 @@ public class GetCentralZoneDataServiceFile extends AbstractProcessor {
             final boolean keepSourceFile = context.getProperty(KEEP_SOURCE_FILE).asBoolean();
             final NiFiZoneDownloadClient czdsClient = client.get();
 
-            final Set<String> downloadUrls = onlyDownloadSpecificZoneFiles
+            final Set<String> requestedZones = onlyDownloadSpecificZoneFiles
                     ? new HashSet<>(Arrays.asList(context.getProperty(TOP_LEVEL_DOMAINS).evaluateAttributeExpressions().getValue().split(",")))
                     : czdsClient.getDownloadURLs();
 
-            for(String downloadUrl : downloadUrls) {
+            for(String requestedZone : requestedZones) {
                 try {
                     FlowFile flowFile = session.create();
                     final long importStart = System.nanoTime();
-                    File zoneFile = czdsClient.getZoneFile(downloadUrl);
+                    File zoneFile = onlyDownloadSpecificZoneFiles ? czdsClient.downloadZoneFile(requestedZone) : czdsClient.getZoneFile(requestedZone);
                     flowFile = session.importFrom(zoneFile.toPath(), keepSourceFile, flowFile);
                     final long importNanos = System.nanoTime() - importStart;
                     final long importMillis = TimeUnit.MILLISECONDS.convert(importNanos, TimeUnit.NANOSECONDS);
@@ -200,7 +203,7 @@ public class GetCentralZoneDataServiceFile extends AbstractProcessor {
                     logger.info("added {} to flow", new Object[]{flowFile});
                     session.commit();
                 } catch (Exception e) {
-                    logger.error("Failed to retrieve zone file for URL {} because {}", new Object[]{downloadUrl, e});
+                    logger.error("Failed to retrieve zone file for {} because {}", new Object[]{requestedZone, e});
                 }
             }
         } catch (Exception e) {

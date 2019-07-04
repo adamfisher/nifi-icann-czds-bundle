@@ -1,5 +1,4 @@
 # nifi-icann-czds-bundle
-A NiFi custom controller service to parse the contents of an RFC 1035 compliant zone file.
 
 This package exposes a **GetCentralZoneDataServiceFile** processor. It creates FlowFiles by downloading zone files from ICANN's Central Zone Data Service (CZDS) program.
 

@@ -9,8 +9,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="nifi-czds-processors" />
-    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-utils:1.9.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.nifi:nifi-utils:1.9.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.nifi:nifi-api:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.icann.czds:czds-client:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.6" level="project" />

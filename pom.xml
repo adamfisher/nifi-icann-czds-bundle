@@ -19,12 +19,12 @@
     <parent>
         <groupId>org.apache.nifi</groupId>
         <artifactId>nifi-nar-bundles</artifactId>
-        <version>1.9.0</version>
+        <version>1.9.2</version>
     </parent>
 
     <groupId>com.github.adamfisher.nifi</groupId>
     <artifactId>nifi-icann-czds-bundle</artifactId>
-    <version>1.9.0</version>
+    <version>1.9.2</version>
     <packaging>pom</packaging>
 
     <modules>

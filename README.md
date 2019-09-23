@@ -1,4 +1,5 @@
 # nifi-icann-czds-bundle
+[![Build Status](https://dev.azure.com/adamfisher/public/_apis/build/status/nifi-icann-czds-bundle?branchName=master)](https://dev.azure.com/adamfisher/public/_build/latest?definitionId=2&branchName=master)
 
 This package exposes a **GetCentralZoneDataServiceFile** processor. It creates FlowFiles by downloading zone files from ICANN's Central Zone Data Service (CZDS) program.
 
